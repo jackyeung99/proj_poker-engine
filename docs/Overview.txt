@@ -1,0 +1,7 @@
+1. Represent poker in code 
+    - Bitmap for faster compute
+2. Develop GTO solver 
+    Search tree (for different decisions ) Monte Carlo CFR
+    Loss function
+3. Reinforcement learning using GTO solver
+4. Simulation 
