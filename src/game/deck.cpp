@@ -1,17 +1,20 @@
 #include <iostream> 
 #include <vector>
 #include <string>
+#include <random>
+#include <algorithm>
 
 using namespace std;
 
 
 class Deck {
     public:
-    void build_deck();
-    
+        vector<string> DeckofCards;
+        void build_deck();
+        void shuffle_deck();
 };
+
 void Deck::build_deck(){
-    vector<string> DeckofCards;
 
     const vector<std::string> SUIT = {"D", "H", "C", "S"};
     const vector<std::string> RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
@@ -26,9 +29,15 @@ void Deck::build_deck(){
 
 }
 
+void Deck::shuffle_deck(){
+    random_device rd;
+    mt19937 g(rd()); 
+    shuffle(DeckofCards.begin(), DeckofCards.end(), g);
+}
 
 int main() {
     Deck deck;
     deck.build_deck();
+    deck.shuffle_deck();
     return 0;
 }

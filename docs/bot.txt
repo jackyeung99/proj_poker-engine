@@ -1,0 +1,21 @@
+
+class object 
+
+attributes
+- balance 
+
+methods 
+- action
+
+
+
+Search 
+- Decision tree for each action 
+- Search using Monte Carlo CFR 
+- Equity calculator
+    - http://proceedings.neurips.cc/paper/2007/file/08d98638c6fcd194a4b1e6992063e944-Paper.pdf
+
+
+Graph neural network??
+
+

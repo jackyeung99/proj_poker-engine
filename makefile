@@ -15,7 +15,7 @@ EXECUTABLES = $(BIN)/main
 all: $(EXECUTABLES)
 
 # Rule for main1
-$(BIN)/main: src/hand.cpp $(OBJ)
+$(BIN)/main: src/deck.cpp $(OBJ)
 	mkdir -p $(BIN)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 

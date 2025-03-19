@@ -1,0 +1,23 @@
+
+Simulate a hand of poker 
+
+
+Sequence of events 
+    - shuffle
+    - Take Ante
+    - deal players
+
+    - first round of betting 
+    - flop 
+    - second round of betting 
+    - turn 
+    - third round of betting 
+    - river 
+    - final round of betting 
+
+    - if one player remains add pot to balance
+    - if n>1 players remain, distirbute money to strongest hand
+    - move blinds
+
+- Bitmap for faster compute
+- hand strength look up value 
