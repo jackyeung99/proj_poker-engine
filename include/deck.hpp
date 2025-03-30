@@ -7,6 +7,7 @@
 
 class Deck {
     public:
+        Deck(); 
         void build_deck();
         void shuffle_deck();
         const std::vector<std::string>& getDeck() const; 

@@ -7,7 +7,6 @@
 #include <algorithm>
 
 
-
 int Player::action(){
     
     return 1;

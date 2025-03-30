@@ -8,6 +8,10 @@
 
 using namespace std;
 
+Deck::Deck() {
+    build_deck();
+}
+
 
 void Deck::build_deck(){
 
