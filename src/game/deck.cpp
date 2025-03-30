@@ -1,23 +1,18 @@
+#include "deck.hpp"
 #include <iostream> 
 #include <vector>
 #include <string>
 #include <random>
 #include <algorithm>
 
+
 using namespace std;
 
 
-class Deck {
-    public:
-        vector<string> DeckofCards;
-        void build_deck();
-        void shuffle_deck();
-};
-
 void Deck::build_deck(){
 
-    const vector<std::string> SUIT = {"D", "H", "C", "S"};
-    const vector<std::string> RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    const vector<string> SUIT = {"D", "H", "C", "S"};
+    const vector<string> RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
     for (string suit: SUIT) {
         for (string rank: RANK){
@@ -25,7 +20,7 @@ void Deck::build_deck(){
 
         }
     }
-    cout << DeckofCards.size();
+    // cout << DeckofCards.size();
 
 }
 
@@ -35,9 +30,6 @@ void Deck::shuffle_deck(){
     shuffle(DeckofCards.begin(), DeckofCards.end(), g);
 }
 
-int main() {
-    Deck deck;
-    deck.build_deck();
-    deck.shuffle_deck();
-    return 0;
+const vector<string>& Deck::getDeck() const {
+    return DeckofCards;
 }

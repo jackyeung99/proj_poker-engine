@@ -1,29 +1,55 @@
-# Compiler and flags
+# Compiler
 CXX = g++
-CXXFLAGS = -Iinclude -Wall -std=c++17
-LDFLAGS = 
+CXXFLAGS = -I$(INCLUDE_DIR) -Wall -std=c++17
 
-# Source and Object files
-# SRC = src/mylib.cpp
-# OBJ = $(SRC:.cpp=.o)
+# Directories
+SRC_DIR = src
+GAME_DIR = $(SRC_DIR)/game
+BUILD_DIR = build
+BIN_DIR = bin
+INCLUDE_DIR = include
 
-# Output binaries
-BIN = bin
-EXECUTABLES = $(BIN)/main
+# Find all source files in src/ and src/game/
+SRCS = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(GAME_DIR)/*.cpp)
 
-# Default target (build all executables)
-all: $(EXECUTABLES)
+# Convert source files into corresponding object files in build/
+OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
+OBJS := $(patsubst $(GAME_DIR)/%.cpp, $(BUILD_DIR)/game/%.o, $(OBJS))
 
-# Rule for main1
-$(BIN)/main: src/deck.cpp $(OBJ)
-	mkdir -p $(BIN)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+# Output Executable
+TARGET = $(BIN_DIR)/main
 
+# Default target: Build everything
+all: $(TARGET)
 
-# Compile object files for shared library
-%.o: %.cpp
+# Compile and link executable
+$(TARGET): $(OBJS) | $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
+
+# Compile source files into object files (src/*.cpp -> build/*.o)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
+	mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean build artifacts
+# Compile game source files into object files (src/game/*.cpp -> build/game/*.o)
+$(BUILD_DIR)/game/%.o: $(GAME_DIR)/%.cpp | $(BUILD_DIR)/game
+	mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Ensure bin and build directories exist
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+$(BUILD_DIR)/game:
+	mkdir -p $(BUILD_DIR)/game
+
+# Clean up compiled files
 clean:
-	rm -rf $(BIN)/* $(OBJ)
+	rm -rf $(BUILD_DIR)/*.o $(BUILD_DIR)/game/*.o $(TARGET)
+
+# Run the program
+run: all
+	./$(TARGET)
