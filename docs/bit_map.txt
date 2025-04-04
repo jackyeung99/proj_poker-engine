@@ -1,0 +1,10 @@
+
+Efficient representation of cards using a Bitmap 
+
+Setup:
+    Let a deck of cards be a binary vector of size 52 where a 1 at a_i represents if card a_i is present.  
+    We can now represent this binary vector as an integer, effectively compressing an array into an integer.
+
+
+Benefits:
+    - Increased efficiency in looking up (will be important when computing game trees)
