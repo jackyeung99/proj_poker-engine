@@ -10,12 +10,12 @@ class Game{
     public:
         Game(); 
         void play_hand();
-        float ante();
+        void ante(float& pot_size);
         void rotate_blinds();
         
         void deal_players(Deck& deck);
-        void take_bets(int shift=2);
-        void turn_cards(int n, Deck& deck);
+        void take_bets(std::vector<int>& active_players, float& potsize, bool is_pre_flop=false);
+        void turn_cards(int n, Deck& deck, CardBitmap& community_cards);
 
         void add_players(int player_cap, int start_bb);
 
@@ -36,8 +36,9 @@ class Game{
     private:
         void evaluate_hands();
         std::vector<Player> players;
+        Deck deck;
         
 };
 
 
-#endif
+#endif 
