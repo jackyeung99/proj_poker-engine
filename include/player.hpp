@@ -1,6 +1,7 @@
 #ifndef player_H
 #define player_H
 
+#include <bitmap.hpp>
 #include <string> 
 #include <vector> 
 
@@ -9,13 +10,8 @@ class Player{
         std::string name; 
         float balance = 0;
         int action();
-        void reset_hand();
-        uint64_t hand_bitmap; 
 
-
-        Player(){
-            hand_bitmap = (1ULL << 52) - 1;
-        }
+        CardBitmap player_hand;
 
     private:
 

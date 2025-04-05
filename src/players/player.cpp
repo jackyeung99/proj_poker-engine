@@ -10,12 +10,7 @@
 using namespace std;
 
 int Player::action(){
-    
     return 1;
 }
 
-
-void Player::reset_hand(){
-    
-}
 

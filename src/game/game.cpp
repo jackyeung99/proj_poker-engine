@@ -1,5 +1,7 @@
 #include "game.hpp"
 #include "player.hpp"
+#include "bitmap.hpp"
+
 #include <iostream> 
 #include <vector>
 #include <string>
@@ -15,57 +17,65 @@ Game::Game() {
     
 void Game::play_hand() {
     Deck deck;
+    
     int n = players.size();
-
+    
     vector<int> active_players(n, 1);
-    uint64_t community_cards = (1ULL << 52) - 1;;
-
-    // vector<int> = deal_players(deck);
-    float pot_size = pre_flop();
-
-
-
+    CardBitmap community_cards;
+    
+    deal_players(deck);
+    float pot_size = ante();
+    
+    for (const auto& p : players) {
+        string hand = p.player_hand.to_string();
+        cout << p.name << ' ' << hand <<'\n';
+    }
+    
 
     rotate_blinds();
 }
 
-
-vector<int> Game::deal_players(Deck& deck) {
-    int shift = 2;
-    int n = players.size();
-    
-    vector<int> hands;
-
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < n; j++) {
-            int newIndex = (j + shift) % n;
-            int card = deck.draw_card();
-            hands.push_back(card);
-            // players[newIndex].receive_card(card);
-        }
-    }
-
-    return hands;
-}
-
-float Game::pre_flop() {
+float Game::ante() {
     float pot_size = 0.0;
-    players[0].balance -= sb;
-    players[1].balance -= bb;
-    pot_size += sb + bb;
+    players[sb].balance -= blinds.first;
+    players[bb].balance -= blinds.second;
+    pot_size += blinds.first + blinds.second;
     return pot_size;
 }
 
 void Game::rotate_blinds(){
     // First player is small blind, second is big blind
-    if (!players.empty()){
-        Player sb = players.front();   
-        players.erase(players.begin()); 
-        players.push_back(sb);       
+    dealer = (dealer + 1) % players.size();
+    sb = (sb + 1) % players.size();
+    bb = (bb + 1) % players.size();
+}
+
+// rotational logic
+void Game::deal_players(Deck& deck) {
+    int shift = 2;
+    int n = players.size();
+
+
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < n; j++) {
+            int new_index = (j + shift) % n;
+            int card = deck.draw_card();
+            players[new_index].player_hand.add(card);
+        }
     }
 }
 
+void take_bets(int shift=2) {
 
+}
+        
+void turn_cards(int n, Deck& deck){
+
+}
+
+
+
+// helpers
 void Game::add_players(int n, int start_bb){
     
     for(int p=0; p<n ; p++){
