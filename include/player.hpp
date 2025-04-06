@@ -7,12 +7,18 @@
 
 class Player{
     public:
+        int id;
         std::string name; 
         float balance = 0;
-        int action();
+        bool is_all_in = false;
+        
+
+        Level decide_action();
+        float decide_raise_amount();
+
+
 
         CardBitmap player_hand;
-
     private:
 
 };

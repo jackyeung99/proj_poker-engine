@@ -8,16 +8,22 @@
 #include <random> 
 
 using namespace std;
+enum Level { FOLD, CHECK, CALL, RAISE };
 
-int Player::action(){
-    std::random_device rd; // Obtain a random seed from the OS
-    std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
+Level Player::decide_action() {
+    std::random_device rd; 
+    std::mt19937 gen(rd()); 
 
-    // Define the range
-    std::uniform_int_distribution<> distrib(1, 3); // Integer in range [1, 10]
+    // Range: 0 = FOLD, 1 = CHECK, 2 = CALL, 3 = RAISE
+    std::uniform_int_distribution<> distrib(0, 3); 
 
-    // Generate and print a random number
-    return distrib(gen);
+    int action = distrib(gen);
+    return static_cast<Level>(action);
+}
+
+
+float Player::decide_raise_amount(){
+    return 0.0f;
 }
 
 

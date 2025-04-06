@@ -16,8 +16,27 @@ Sequence of events
     - final round of betting 
 
     - if one player remains add pot to balance
+    - hand strength look up value 
     - if n>1 players remain, distirbute money to strongest hand
     - move blinds
 
-- Bitmap for faster compute
-- hand strength look up value 
+
+    ?? How do check if round ends earlier ??
+
+
+Bettig round logic
+
+    Main Loop
+        - loop players 
+        - vector of player bets 
+        - Keep track of highest bet
+        - if only one player 
+
+
+    Individual action
+        - if players bet is less than max 
+            must fold, call or raise 
+        -  else 
+            fold, check, raise 
+
+    ?? Side Pots ??
